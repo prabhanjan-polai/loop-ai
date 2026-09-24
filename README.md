@@ -135,6 +135,24 @@ loop-ai/
 | `npm run lint` | Runs ESLint analysis for code quality |
  
 ---
+## Screenshots
+
+### Home Page
+![Home](images/home.jpg)
+
+### Dashboard
+![Dashboard](images/dashbord.png)
+
+### Settings
+![Settings](images/settings.png)
+### Command Center
+![Command Center](images/comandcenter.jpeg)
+
+### Feedback Inbox
+
+![Feedback Inbox](images/feedback%20inbox.jpeg)
+
+---
  
 ## 🗺️ Roadmap
  
