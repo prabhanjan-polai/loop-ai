@@ -19,6 +19,34 @@ An end-to-end AI-powered feedback intelligence platform that aggregates, classif
 - 🤖 **Copilot:** Assistant view for exploring and acting on feedback inside the dashboard.
 - 📊 **Automated Report Generation:** One-click executive reports with charts, trends, and product recommendations.
 ---
+
+
+## 🏗️ CI/CD Pipeline Architecture
+
+Our DevOps & CI/CD workflow is powered by **GitHub Actions** and includes continuous testing, quality gates, security auditing, and automated deployment:
+
+```mermaid
+graph TD
+    A[Git Push / PR to main] --> B[GitHub Actions Runner]
+    
+    subgraph "Continuous Integration (CI)"
+        B --> C[TypeScript Type Check: tsc --noEmit]
+        B --> D[ESLint Analysis: next lint]
+        B --> E[Security Vulnerability Audit: npm audit]
+        C & D & E --> F[Next.js Production Build: npm run build]
+        F --> G[Upload Build Artifacts]
+    end
+
+    subgraph "Security Analysis"
+        B --> H[CodeQL Static Analysis]
+    end
+
+    subgraph "Continuous Deployment (CD)"
+        F --> I{Branch == main?}
+        I -->|Yes| J[Deploy to Production / Vercel]
+        I -->|No / PR| K[Generate Preview Deployment]
+    end
+```
  
 ## 🗂️ Project Structure
  
