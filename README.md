@@ -1,116 +1,129 @@
 # 🔁 FeedbackLoop AI — Enterprise Customer Feedback Intelligence Engine
-
-[![CI Pipeline](https://github.com/sunnybitla/Zidio_interntask/actions/workflows/ci.yml/badge.svg)](https://github.com/sunnybitla/Zidio_interntask/actions/workflows/ci.yml)
-[![CD Pipeline](https://github.com/sunnybitla/Zidio_interntask/actions/workflows/cd.yml/badge.svg)](https://github.com/sunnybitla/Zidio_interntask/actions/workflows/cd.yml)
-[![CodeQL](https://github.com/sunnybitla/Zidio_interntask/actions/workflows/codeql.yml/badge.svg)](https://github.com/sunnybitla/Zidio_interntask/actions/workflows/codeql.yml)
+ 
 [![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=flat&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
-
+[![GitHub repo](https://img.shields.io/badge/GitHub-prabhanjan--polai%2Floop--ai-181717?style=flat&logo=github)](https://github.com/prabhanjan-polai/loop-ai)
+ 
 An end-to-end AI-powered feedback intelligence platform that aggregates, classifies, analyzes, and extracts actionable product insights from omni-channel customer feedback in real time.
-
+ 
 ---
-
+ 
 ## 🌟 Key Features
-
-- 📥 **Omnichannel Ingestion:** Real-time stream simulator, CSV batch uploads, Zendesk, Intercom, G2, Discord, and manual ingest forms.
+ 
+- 📥 **Omnichannel Ingestion:** Real-time stream simulator, CSV batch uploads, and manual ingest forms.
 - 🧠 **AI Classification & Sentiment Engine:** Sentiment scoring, urgency detection, root cause categorization, and automated tag assignment.
 - ⚡ **Executive & Product Themes:** Dynamic cluster analysis, pain point heatmaps, feature request tracking, and revenue risk assessment.
-- 💬 **Ask-Loop (RAG AI Assistant):** Natural language Q&A across the entire customer feedback knowledge base with vector embeddings.
-- 📊 **Automated Report Generation:** One-click executive PDF exports with charts, trends, and product recommendations.
-- 🚀 **Full CI/CD Automation:** Automated linting, type-checking, security vulnerability scanning, and multi-environment deployment pipelines.
-
+- 💬 **Ask-Loop (RAG AI Assistant):** Natural language Q&A across the entire customer feedback knowledge base using vector embeddings.
+- 🤖 **Copilot:** Assistant view for exploring and acting on feedback inside the dashboard.
+- 📊 **Automated Report Generation:** One-click executive reports with charts, trends, and product recommendations.
 ---
-
-## 🏗️ CI/CD Pipeline Architecture
-
-Our DevOps & CI/CD workflow is powered by **GitHub Actions** and includes continuous testing, quality gates, security auditing, and automated deployment:
-
-```mermaid
-graph TD
-    A[Git Push / PR to main] --> B[GitHub Actions Runner]
-    
-    subgraph "Continuous Integration (CI)"
-        B --> C[TypeScript Type Check: tsc --noEmit]
-        B --> D[ESLint Analysis: next lint]
-        B --> E[Security Vulnerability Audit: npm audit]
-        C & D & E --> F[Next.js Production Build: npm run build]
-        F --> G[Upload Build Artifacts]
-    end
-
-    subgraph "Security Analysis"
-        B --> H[CodeQL Static Analysis]
-    end
-
-    subgraph "Continuous Deployment (CD)"
-        F --> I{Branch == main?}
-        I -->|Yes| J[Deploy to Production / Vercel]
-        I -->|No / PR| K[Generate Preview Deployment]
-    end
+ 
+## 🗂️ Project Structure
+ 
+```text
+loop-ai/
+├── app/
+│   ├── api/                  # Route handlers
+│   │   ├── ask-loop/         # RAG Q&A endpoint
+│   │   ├── classify/         # Sentiment & classification endpoint
+│   │   ├── feedback/         # Feedback CRUD endpoint
+│   │   └── reports/          # Report generation endpoint
+│   ├── dashboard/            # Dashboard pages
+│   │   ├── ask-loop/
+│   │   ├── copilot/
+│   │   ├── executive/
+│   │   ├── inbox/
+│   │   ├── ingestion/
+│   │   ├── reports/
+│   │   ├── settings/
+│   │   └── themes/
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx              # Landing page
+├── components/
+│   ├── feedback/             # FeedbackCard, FeedbackDrawer
+│   ├── ingestion/            # CSVIngester, ManualIngestModal, SimulatedSourceStream
+│   ├── layout/               # Header, Sidebar
+│   └── ui/                   # StatCard
+├── lib/
+│   ├── ai/                   # classifier, embeddings, rag, reportGenerator
+│   ├── seed-data.ts          # Demo data
+│   ├── store.ts              # Client state store
+│   └── utils.ts
+├── next.config.mjs
+├── tailwind.config.ts
+└── tsconfig.json
 ```
-
-### 📋 CI/CD Workflows Included
-
-| Workflow | File | Triggers | Description |
-| :--- | :--- | :--- | :--- |
-| **CI Pipeline** | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | `push`, `pull_request` | Validates Node 18 & 20 matrix, runs TypeScript typecheck, ESLint, npm security audit, and validates production build. |
-| **CD Pipeline** | [`.github/workflows/cd.yml`](.github/workflows/cd.yml) | `push` (main), `workflow_dispatch` | Deploys production bundle to cloud target (Vercel/Cloud), supports manual dispatch with rollback/staging choice. |
-| **CodeQL Security** | [`.github/workflows/codeql.yml`](.github/workflows/codeql.yml) | `push`, `pull_request`, weekly cron | Deep static analysis for security vulnerabilities and code quality. |
-| **Dependabot** | [`.github/dependabot.yml`](.github/dependabot.yml) | Weekly | Automated PRs for outdated npm dependencies and GitHub Actions versions. |
-
+ 
 ---
-
+ 
+## 🧰 Tech Stack
+ 
+| Layer | Technology |
+| :--- | :--- |
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| AI Layer | Classifier, embeddings, and RAG pipeline in `lib/ai/` |
+| Linting | ESLint (`next lint`) |
+ 
+---
+ 
 ## 🚀 Getting Started
-
+ 
 ### Prerequisites
 - Node.js 18.x or 20.x
-- npm 9+ or yarn / pnpm
-
+- npm 9+ (or yarn / pnpm)
 ### Local Installation
-
+ 
 1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/sunnybitla/Zidio_interntask.git
-   cd Zidio_interntask
-   ```
-
+```bash
+   git clone https://github.com/prabhanjan-polai/loop-ai.git
+   cd loop-ai
+```
+ 
 2. **Install dependencies:**
-   ```bash
+```bash
    npm install
-   ```
-
+```
+ 
 3. **Run the development server:**
-   ```bash
+```bash
    npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) with your browser to explore the dashboard.
-
+```
+   Open [http://localhost:3000](http://localhost:3000) in your browser to explore the dashboard.
+ 
 ---
-
+ 
 ## 🛠️ Available Scripts
-
+ 
 | Command | Purpose |
 | :--- | :--- |
-| `npm run dev` | Starts local Next.js development server with Turbopack/HMR |
-| `npm run build` | Compiles optimized production build |
+| `npm run dev` | Starts the local Next.js development server |
+| `npm run build` | Compiles an optimized production build |
 | `npm run start` | Serves the production build locally |
 | `npm run lint` | Runs ESLint analysis for code quality |
-| `npm run typecheck` | Runs TypeScript compiler checks without emitting files |
-
+ 
 ---
-
-## 🔐 Setting Up CI/CD Deployment Secrets
-
-To enable automated production deployments through GitHub Actions:
-
-1. Navigate to **Repository Settings** > **Secrets and variables** > **Actions**.
-2. Add the following repository secrets:
-   - `VERCEL_TOKEN`: Your Vercel account API Token
-   - `VERCEL_ORG_ID`: Your Vercel Organization ID
-   - `VERCEL_PROJECT_ID`: Your Vercel Project ID
-
+ 
+## 🗺️ Roadmap
+ 
+- [ ] Connect real sources (Zendesk, Intercom, G2, Discord)
+- [ ] Persistent database instead of in-memory store
+- [ ] Authentication and role-based access
+- [ ] CI/CD with GitHub Actions and deployment to Vercel
 ---
-
+ 
+## 👤 Author
+ 
+**Prabhanjan Polai**
+- GitHub: [@prabhanjan-polai](https://github.com/prabhanjan-polai)
+- Email: prabhanjanpolai85@gmail.com
+---
+ 
 ## 📄 License
+ 
 This project is open-source and available under the [MIT License](LICENSE).
+ 
